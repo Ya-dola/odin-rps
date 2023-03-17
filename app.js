@@ -12,12 +12,15 @@ const playerChoiceTxt = document.querySelector('#playerChoice');
 const compChoiceTxt = document.querySelector('#compChoice');
 
 // Lets
-let roundResult = "";
+let roundResult = "First to 5 WINS!!!";
 let playerWinCount = 0;
 let compWinCount = 0;
 let roundCount = 0;
 
 // Main Execution
+
+// Starting State of Game
+roundResTxt.textContent = roundResult;
 btnRestart.style.display = "none";
 
 // Functions
