@@ -1,12 +1,24 @@
 // Variables
+// Constants
 const RPS = ["ROCK", "PAPER", "SCISSORS"];
+const optRock = document.querySelector('#btnRock');
+const optPaper = document.querySelector('#btnPaper');
+const optScissors = document.querySelector('#btnScissors');
+const btnRestart = document.querySelector('#btnRestart');
+const roundResTxt = document.querySelector('#roundRes');
+const playerScoreTxt = document.querySelector('#playerScore');
+const compScoreTxt = document.querySelector('#compScore');
+const playerChoiceTxt = document.querySelector('#playerChoice');
+const compChoiceTxt = document.querySelector('#compChoice');
+
+// Lets
 let roundResult = "";
 let playerWinCount = 0;
 let compWinCount = 0;
-let promptMsg = `Write your Playing Choice!\nOptions are: ${RPS[0]}, ${RPS[1]} or ${RPS[2]}`;
+let roundCount = 0;
 
 // Main Execution
-game()
+btnRestart.style.display = "none";
 
 // Functions
 function getComputerChoice() {
@@ -15,16 +27,17 @@ function getComputerChoice() {
 
 function playRound(playerChoice, compChoice) {
 
-    // Allows player to enter choice in case-insensitive format
-    playerChoice = playerChoice.toUpperCase();
+    // Update Choices
+    playerChoiceTxt.textContent = `Player: ${playerChoice}`;
+    compChoiceTxt.textContent = `Computer: ${compChoice}`;
 
-    if (compChoice === playerChoice) roundResult = "tie";
+    if (compChoice === playerChoice) roundResult = "Tie";
 
     // Player Winning Conditions
     if (playerChoice === RPS[0] && compChoice === RPS[2] ||
         playerChoice === RPS[2] && compChoice === RPS[1] ||
         playerChoice === RPS[1] && compChoice === RPS[0]) {
-        roundResult = `Player Wins the round! \nPlayer: ${playerChoice} | Computer: ${compChoice}`;
+        roundResult = "Player Wins the Round!";
         playerWinCount++;
     }
 
@@ -32,30 +45,58 @@ function playRound(playerChoice, compChoice) {
     if (compChoice === RPS[0] && playerChoice === RPS[2] ||
         compChoice === RPS[2] && playerChoice === RPS[1] ||
         compChoice === RPS[1] && playerChoice === RPS[0]) {
-        roundResult = `Computer Wins the round! \nComputer: ${compChoice} | Player: ${playerChoice}`;
+        roundResult = "Computer Wins the Round!";
         compWinCount++;
     }
+
+    roundCount++;
+
+    updateDOMValues();
+
+    gameEndCheck();
 }
 
-function game() {
+function updateDOMValues() {
+    // Update Result of Round
+    roundResTxt.textContent = `Round ${roundCount}\n${roundResult}`;
 
-    // Reset Values for Counters
-    playerWinCount = 0;
-    compWinCount = 0;
+    // Update Scores
+    playerScoreTxt.textContent = `Player: ${playerWinCount}`;
+    compScoreTxt.textContent = `Computer: ${compWinCount}`;
+}
 
-    for (let i = 0; i < 5; i++) {
-        // playRound(prompt(`Round ${i + 1}\n${promptMsg}`), getComputerChoice());
+function gameEndCheck() {
+    if (playerWinCount === 5 || compWinCount === 5) {
+        roundResTxt.textContent =
+            `${playerWinCount > compWinCount ? "Player" : "Computer"} Wins the GAME!`;
 
-        // Log Result of Round
-        console.log(`Round ${i + 1}\n${roundResult}`);
+        // End the Game
+        displayEndGameBtns();
     }
-
-    if (playerWinCount === compWinCount)
-        roundResult = "Game is a tie!";
-    else if (playerWinCount > compWinCount)
-        roundResult = "Player Wins Game!";
-    else
-        roundResult = "Computer Wins Game!";
-
-    console.log(roundResult);
 }
+
+function displayEndGameBtns() {
+    optRock.style.display = "none";
+    optPaper.style.display = "none";
+    optScissors.style.display = "none";
+
+    btnRestart.style.display = "block";
+}
+
+// Event Listeners
+optRock.addEventListener('click', () => {
+    playRound(RPS[0], getComputerChoice());
+});
+
+optPaper.addEventListener('click', () => {
+    playRound(RPS[1], getComputerChoice());
+});
+
+optScissors.addEventListener('click', () => {
+    playRound(RPS[2], getComputerChoice());
+});
+
+btnRestart.addEventListener('click', () => {
+    // Reload the Page to Restart the Game
+    location.reload();
+});

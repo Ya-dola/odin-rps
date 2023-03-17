@@ -7,10 +7,22 @@
         <script src="app.js" defer></script>
     </head>
     <body>
+        <div id="roundRes" class="infoTxt"></div> <!--JS Handled Value-->
+        <div class="infoTxt">Choice</div>
+        <div class="infoContainer">
+            <div id="playerChoice" class="infoTxt"></div> <!--JS Handled Value-->
+            <div id="compChoice" class="infoTxt"></div> <!--JS Handled Value-->
+        </div>
+        <div class="infoTxt">Scores</div>
+        <div class="infoContainer">
+            <div id="playerScore" class="infoTxt"></div> <!--JS Handled Value-->
+            <div id="compScore" class="infoTxt"></div> <!--JS Handled Value-->
+        </div>
         <div class="choices">
-            <button class="option">Rock</button>
-            <button class="option">Paper</button>
-            <button class="option">Scissors</button>
+            <button id="btnRock" class="option">Rock</button>
+            <button id="btnPaper" class="option">Paper</button>
+            <button id="btnScissors" class="option">Scissors</button>
+            <button id="btnRestart" class="option">Restart Game</button>
         </div>
     </body>
 </html>
