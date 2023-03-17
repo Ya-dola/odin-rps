@@ -44,7 +44,7 @@ function game() {
     compWinCount = 0;
 
     for (let i = 0; i < 5; i++) {
-        playRound(prompt(`Round ${i + 1}\n${promptMsg}`), getComputerChoice());
+        // playRound(prompt(`Round ${i + 1}\n${promptMsg}`), getComputerChoice());
 
         // Log Result of Round
         console.log(`Round ${i + 1}\n${roundResult}`);
