@@ -43,10 +43,10 @@ body {
 }
 
 .option {
-    border: 5px royalblue solid;
+    border: 6px #4f78f6 solid;
     border-radius: 12px;
-    background: coral;
-    color: #dbdbe7;
+    background: #ff885b;
+    color: #f5f5fa;
     font-weight: 500;
     font-size: 60px;
     min-width: 280px;
